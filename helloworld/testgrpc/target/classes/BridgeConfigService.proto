@@ -1,0 +1,144 @@
+syntax = "proto3";
+
+import "OvsController.proto";
+import "OvsPort.proto";
+import "TunnelDescription.proto";
+import "base_message.proto";
+import "OvsInterface.proto";
+
+option java_multiple_files = true;
+option java_package = "com.cotx.ovsctl.service";
+option java_outer_classname = "BridgeConfigProto";
+option objc_class_prefix = "HLW";
+
+/*
+    BridgeConfig service interface
+*/
+service BridgeConfig{
+
+    /* Adds a controller to a given bridge. */
+    rpc addController(AddControllerRequest)returns(Bool);
+
+    /* Removes a controller from a given bridge. */
+    rpc deleteController(DeleteControllerRequest)returns(Void);
+
+    /* Get controllers of a given bridge. */
+    rpc getControllers(CommonField)returns(GetControllersResponse);
+
+    /* Adds a port to a given bridge. */
+    rpc addPort(AddPortRequest)returns(Bool);
+
+    /* Adds a port with tunnel configure to a given bridge. */
+    rpc addTunnelPort(AddTunnelPortRequest)returns(Void);
+
+    /* Removes a port from a given bridge. */
+    rpc deletePort(PortRequest)returns(Bool);
+
+    /* Get ports of a given bridge. */
+    rpc getPorts(CommonField)returns(GetPortsResponse);
+
+    /* Get a port from a given bridge. */
+    rpc getPortByUuid(PortRequest)returns(OvsPort);
+
+    /* Get interfaces from a given bridge,or get interfaces from a given port. */
+    rpc getInterfaces(PortRequest)returns(GetInterfacesResponse);
+
+    /* Get a port from a given bridge. */
+    rpc getInterface(InterfaceRequest)returns(OvsInterface);
+
+    /* Get a port from a given bridge. */
+    rpc addInterface(AddInterfaceRequest)returns(Bool);
+
+    /* Get a port from a given bridge. */
+    rpc deleteInterface(InterfaceRequest)returns(Bool);
+}
+
+/*
+    rpc addController's request message(parameters).
+*/
+message AddControllerRequest{
+    CommonField bridgeName =1;
+    OvsController controller=2;
+}
+
+/*
+    rpc deleteController's request message.
+*/
+message DeleteControllerRequest{
+    CommonField bridgeName =1;
+    string controllerTarget=2;
+}
+
+/*
+    rpc getControllers's response message.
+*/
+message GetControllersResponse{
+    repeated OvsController ovsController=1;
+}
+
+/*
+    rpc addPort's request message.
+*/
+message AddPortRequest{
+    string bridgeDpid=1;
+    OvsPort ovsPort=2;
+}
+
+/*
+    rpc addTunnelPort's request message.
+*/
+message AddTunnelPortRequest{
+    CommonField bridgeName=1;
+    OvsPort ovsPort=2;
+    TunnelDescription tunnelDescription=3;
+}
+
+/*
+    1. rpc deletePort's request message.
+    2. rpc getPortByUuid's request message.
+    3. rpc getInterfaces's request message.
+    4. InterfaceRequest's message item.
+    5. AddInterfaceRequest's message item.
+*/
+message PortRequest{
+    string bridgeDpid=1;
+    string portUuid=2;
+}
+
+/*
+    rpc getPorts's response message.
+*/
+message GetPortsResponse{
+    repeated OvsPort ovsPort=1;
+}
+
+/*
+    rpc getInterfaces's response message.
+*/
+message GetInterfacesResponse{
+    repeated OvsInterface ovsInterface= 1;
+}
+
+/*
+    1. rpc getInterface's requset message.
+    2. rpc deleteInterface's request message.
+*/
+message InterfaceRequest{
+    PortRequest portRequest=1;
+    string infUuid=2;
+}
+
+/*
+    rpc addInterface's request message.
+*/
+message AddInterfaceRequest{
+    PortRequest portRequest=1;
+    OvsInterface ovsInterface=2;
+}
+
+/*
+    service interface's common field
+*/
+message CommonField{
+    string bridgeName=1;
+}

@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.cotx.ovsctl.description";
+option java_outer_classname = "BridgeDescriptionProto";
+option objc_class_prefix = "HLW";
+
+/*
+    1. define BridgeDescription message type.
+*/
+message BridgeDescription{
+
+    /*
+        OvsBridge's message item.
+    */
+    enum FailMode{
+        /*
+            The bridge will not set up flows on its own when the controller
+            connection fails or no controllers are defined.
+        */
+        SECURE=0;
+        /*
+            The bridge will take over responsibility of setting up flows.
+        */
+        STANDALONE=1;
+    }
+}

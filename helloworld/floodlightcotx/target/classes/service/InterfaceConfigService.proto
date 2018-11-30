@@ -1,0 +1,125 @@
+syntax = "proto3";
+
+import "base_message.proto";
+import "common/VlanId.proto";
+import "description/TunnelDescription.proto";
+import "description/PatchDescription.proto";
+import "description/InterfaceDescription.proto";
+
+option java_multiple_files = true;
+option java_package = "com.cotx.ovsctl.service.message.interfaceconfig";
+option java_outer_classname = "InterfaceConfigProto";
+option objc_class_prefix = "HLW";
+
+/*
+    to avoid message conflict，we need to define a package name.
+*/
+package InterfaceConfig;
+
+/*
+    InterfaceConfig service interface
+*/
+service InterfaceConfig{
+
+    /* Adds an access interface to a VLAN. */
+    rpc addAccessMode(AddAccessModeRequest)returns(Bool);
+
+    /* Removes an access interface to a VLAN. */
+    rpc removeAccessMode(CommonField)returns(Bool);
+
+    /* Adds a trunk interface for VLANs. */
+    rpc addTrunkMode(AddTrunkModeRequest)returns(Bool);
+
+    /* Removes trunk mode configuration from an interface. */
+    rpc removeTrunkMode(CommonField)returns(Bool);
+
+    /* Adds a rate limit on an interface. */
+    rpc addRateLimit(AddRateLimitRequest)returns(Bool);
+
+    /* Removes rate limit from an interface. */
+    rpc removeRateLimit(CommonField)returns(Bool);
+
+    /* Adds a tunnel mode to supplied interface. */
+    rpc addTunnelMode(AddTunnelModeRequest)returns(Bool);
+
+    /* Removes a tunnel interface. */
+    rpc removeTunnelMode(CommonField)returns(Bool);
+
+    /* Adds a patch mode to the supplied interface. */
+    rpc addPatchMode(AddPatchModeRequest)returns(Bool);
+
+    /* Removes a patch mode from the supplied interface. */
+    rpc removePatchMode(RemovePatchModeRequest)returns(Bool);
+
+    /* Provides the interfaces configured on a device. */
+    rpc getInterfaces(Void)returns(GetInterfacesResponse);
+}
+
+/*
+    rpc addAccessMode's message request.
+*/
+message AddAccessModeRequest{
+    CommonField intf=1;
+    VlanId vlanId=2;
+}
+
+/*
+    rpc addTrunkMode's request message.
+*/
+message AddTrunkModeRequest{
+    CommonField intf=1;
+    repeated VlanId vlanIds=2;
+}
+
+/*
+    rpc addRateLimit's request message.
+*/
+message AddRateLimitRequest{
+    CommonField intf=1;
+    int32 limit=2;
+}
+
+/*
+    rpc addTunnelMode's request message.
+*/
+message AddTunnelModeRequest{
+    CommonField intf=1;
+    TunnelDescription tunnelDesc=2;
+}
+
+/*
+    rpc addPatchMode's request message.
+*/
+message AddPatchModeRequest{
+    string ifaceName=1;
+    PatchDescription patchInterface=2;
+}
+
+/*
+    rpc removePatchMode's request message.
+*/
+message RemovePatchModeRequest{
+    string ifaceName=1;
+}
+
+/*
+      rpc getInterfaces's response message.
+*/
+message GetInterfacesResponse{
+    repeated InterfaceDescription interfaceDescription=1;
+}
+
+/*
+    1. service interface's common field
+    2. rpc removeAccessMode's request message.
+    3. AddAccessModeRequest's message item.
+    4. AddTrunkModeRequest's message item.
+    5. rpc removeTrunkMode's request message.
+    6. AddRateLimitRequest's message item.
+    7. rpc CommonField's request message.
+    8. AddTunnelModeRequest's message item.
+    9. removeTunnelMode's request message.
+*/
+message CommonField{
+    string intf=1;
+}

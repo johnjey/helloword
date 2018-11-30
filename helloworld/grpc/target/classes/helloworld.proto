@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+import "common.proto";
+
+//生成多个.java文件
+option java_multiple_files = true;
+
+option java_package = "io.grpc.examples.helloworld";
+option java_outer_classname = "HelloWorldProto";//如果这一个选项没有设置，则默认的类名就是helloworld.java这是helloworld.proto的名称
+option objc_class_prefix = "HLW";
+
+
+
+/* 服务 */
+service Greeter {
+    rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+message HelloRequest{
+    NiHao nihao=1;
+}
+
+message HelloReply{
+    string name=1;
+}

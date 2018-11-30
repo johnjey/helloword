@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+import "description/BridgeDescription.proto";
+import "common/ControllerInfo.proto";
+import "common/ControllProtocolVersion.proto";
+
+option java_multiple_files = true;
+option java_package = "com.cotx.ovsctl.ovsdb.ovs.core";
+option java_outer_classname = "OvsBridgeProto";
+option objc_class_prefix = "HLW";
+
+/*
+    1. define OvsBridge message type.
+    2. AddBridgeRequest's message item.
+*/
+message OvsBridge{
+    string uuid=1;
+    string name=2;
+
+    /* OpenFlow properties */
+    BridgeDescription.FailMode failMode=3;
+
+    /* Add control protocol version property */
+    repeated ControllerInfo controllers=4;
+
+    /* Adds more properties */
+    string datapathType=5;
+
+    /* Add control protocol version property */
+    repeated ControlProtocolVersion controlProtocols=6;
+
+    /* other optional configs */
+    map<string,string> otherConfigs=7;
+}

@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+import "common/PortNumber.proto";
+import "base_message.proto";
+
+option java_multiple_files = true;
+option java_package = "com.cotx.ovsctl.service.message.portconfig";
+option java_outer_classname = "PortConfigProto";
+option objc_class_prefix = "HLW";
+
+/*
+    PortConfig service interface
+*/
+service PortConfig{
+
+    /* Enable administratively a port. */
+    rpc enable(CommonRequestPara)returns(Bool);
+
+    /* Disable administratively a port. */
+    rpc disable(CommonRequestPara)returns(Bool);
+
+    /* Retrieves the information about the administrative state of a port. */
+    rpc isEnabled(CommonRequestPara)returns(Bool);
+}
+
+/*
+    1. rpc enable's request message.
+    2. rpc disable's request message.
+    3. rpc isEnabled's request message.
+*/
+message CommonRequestPara{
+    PortNumber number=1;
+}

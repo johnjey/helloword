@@ -1,0 +1,19 @@
+/*The current use protocol buffers version*/
+syntax = "proto3";
+
+/*
+    Each message generates multiple java file.
+    Default setting is false.
+*/
+option java_multiple_files = true;
+/*
+    generate package path
+*/
+option java_package = "com.cotx.ovsctl.service";
+/*
+    1. setting outer classname when java_multiple_files is false or default;otherwise(if true),it does't work.
+    2. if java_multiple_files is not setting,default classname is name of xxx.proto that you define .proto file
+*/
+option java_outer_classname = "BridgeConfigProto";
+
+option objc_class_prefix = "HLW";

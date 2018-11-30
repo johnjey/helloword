@@ -1,0 +1,18 @@
+syntax = "proto2";
+
+option java_multiple_files = true;
+option java_package = "com.cotx.ovsctl.common";
+option java_outer_classname = "ControllerInfoProto";
+option objc_class_prefix = "HLW";
+
+/*
+    1. define ControllerInfo message type.
+    2. OvsBridge's message item.
+*/
+message ControllerInfo{
+    //TODO
+    //这个和老大交流一下
+    //InetAddress ip=1;
+    required int32 port=2 [default=6653];
+    required string type=3 [default="error"];
+}

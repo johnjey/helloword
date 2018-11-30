@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+import "ovsdb/ovs/core/OvsBridge.proto";
+import "base_message.proto";
+
+option java_multiple_files = true;
+option java_package = "com.cotx.ovsctl.service.message.switchconfig";
+option java_outer_classname = "SwitchConfigProto";
+option objc_class_prefix = "HLW";
+
+service SwitchConfig{
+    /*
+        Adds a bridge with a given description.
+    */
+    rpc addBridge(AddBridgeRequest)returns(Bool);
+
+    /*
+        Remove a bridge.
+    */
+    rpc deleteBridge(BridgeRequest)returns(Bool);
+
+    /*
+        Get a bridge.
+    */
+    rpc getBridge(BridgeRequest)returns(GetBridgeResponse);
+
+    /*
+        Get all bridges.
+    */
+    rpc getBridges(Void)returns(GetBridgesResponse);
+}
+
+/*
+    rpc addBridge's request message.
+*/
+message AddBridgeRequest{
+    OvsBridge bridge=1;
+}
+
+/*
+    1. rpc deleteBridge's request message.
+    2. rpc getBridge's request message.
+*/
+message BridgeRequest{
+    string bridgeDpid=1;
+}
+
+/*
+    rpc getBridge's response message.
+*/
+message GetBridgeResponse{
+    OvsBridge ovsBridge=1;
+}
+
+/*
+    rpc getBridges's response message.
+*/
+message GetBridgesResponse{
+    repeated OvsBridge ovsBridge=1;
+}

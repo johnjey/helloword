@@ -1,0 +1,14 @@
+syntax = "proto2";
+
+//生成多个.java文件
+option java_multiple_files = true;
+
+option java_package = "io.grpc.examples.helloworld";
+option java_outer_classname = "CommonProto";//如果这一个选项没有设置，则默认的类名就是helloworld.java这是helloworld.proto的名称
+option objc_class_prefix = "HLW";
+
+message NiHao{
+    required string name=1;
+    required string email=2;
+    required int32 age=3 [default=18];
+}

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.cotx.ovsctl.ovsdb.ovs.core";
+option java_outer_classname = "OvsControllerProto";
+option objc_class_prefix = "HLW";
+
+/*
+    1. define OvsController message type.
+    2. AddControllerRequest's message item.
+    3. GetControllersResponse's message item.
+*/
+message OvsController{
+    string target=1;
+    string connectionMode=2;
+    int64 maxBackoff=3;
+    int64 inactivityProbe=4;
+    bool enableAsyncMessages=5;
+    int64 controllerRateLimit=6;
+    int64 controllerBurstLimit=7;
+    string localIp=8;
+    string localNetMask=9;
+}
+

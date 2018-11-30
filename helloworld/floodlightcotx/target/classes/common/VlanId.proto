@@ -1,0 +1,51 @@
+syntax = "proto2";
+
+option java_multiple_files = true;
+option java_package = "com.cotx.ovsctl.common";
+option java_outer_classname = "VlanIdProto";
+option objc_class_prefix = "HLW";
+
+/*
+    1. define VlanId message,representation of a VLAN identifier.
+    2. AddAccessModeRequest's message item.
+    3. AddTrunkModeRequest's message item.
+
+*/
+message VlanId{
+    /*
+        Based on convention used elsewhere? Check and change if needed
+        default value 65535
+    */
+    required int32 UNTAGGED=1 [default=65535];
+
+    /*
+         In a traffic selector, this means that a VLAN ID must be present,
+         but can have any value. We use the same value as OpenFlow,
+         but this is not required.
+    */
+    optional int32 ANY_VALUE=2 [default=4096];
+
+    /*
+        0 is not used for VLAN ID
+    */
+    required int32 NO_VID=3 [default=0];
+
+    /*
+        represents all tagged traffic
+    */
+    required int32 RESERVED=4 [default=4095];
+
+    required string STRING_NONE=5 [default="None"];
+    required string STRING_NUMERIC_NONE=6 [default="-1"];
+    required string STRING_ANY=7 [default="Any"];
+    /*
+        A VLAN ID is actually 12 bits of a VLAN tag.
+    */
+    required int32 MAX_VLAN=8 [default=4095];
+
+    //TODO
+    //这两个的值是在VlanId.java中，通过调用方法来赋值的，这里我就暂时不给它默认值了。
+    required VlanId NONE=9;
+    required VlanId ANY=10;
+
+}

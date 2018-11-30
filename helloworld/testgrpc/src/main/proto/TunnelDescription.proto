@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.cotx.ovsctl.description";
+option java_outer_classname = "TunnelDescriptionProto";
+option objc_class_prefix = "HLW";
+
+/*
+    AddTunnelModeRequest's message item.
+*/
+message TunnelDescription{
+
+    /*
+        Tunnel technology type
+    */
+    enum Type{
+        /*
+            Signifies that this is a MPLS tunnel.
+        */
+        MPLS=0;
+        /*
+            Signifies that this is a L2 tunnel.
+        */
+        VLAN=1;
+        /*
+            Signifies that this is a DC L2 extension tunnel.
+        */
+        VXLAN=2;
+        /*
+            Signifies that this is a L3 tunnel.
+        */
+        GRE=3;
+        /*
+            Signifies that this is a L1 OTN tunnel.
+        */
+        ODUK=4;
+        /*
+            Signifies that this is a L0 OCH tunnel.
+        */
+        OCH=5;
+    }
+}

@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+import "base_message.proto";
+
+option java_multiple_files = true;
+option java_package = "com.cotx.ovsctl.ovsdb.ovs.core";
+option java_outer_classname = "OvsInterfaceProto";
+option objc_class_prefix = "HLW";
+
+/*
+    1. define OvsInterface message type.
+    2. rpc getInterface's response message.
+    3. AddInterfaceRequest's message item.
+*/
+message OvsInterface{
+    string uuid=1;
+    string name=2;
+    Type type=3;
+    int64 mtu=4;
+    MapEntry options=5;
+    int32 ofport=6;
+}
+
+enum Type{
+    /*
+        An ordinary network device, e.g. eth0 on Linux.
+    */
+    SYSTEM=0;
+    /*
+        A simulated network device that sends and receives traffic.
+    */
+    INTERNAL=1;
+    /*
+        A TUN/TAP device managed by Open vSwitch.
+    */
+    TAP=2;
+    /*
+        An Ethernet over RFC 2890 Generic Routing Encapsulation over IPv4 IPsec tunnel.
+    */
+    GRE=3;
+    /*
+        An Ethernet tunnel over the experimental, UDP-based VXLAN protocol.
+    */
+    VXLAN=4;
+    /*
+        A pair of virtual devices that act as a patch cable.
+    */
+    PATCH=5;
+    /*
+        A DPDK net device.
+    */
+    DPDK=6;
+}

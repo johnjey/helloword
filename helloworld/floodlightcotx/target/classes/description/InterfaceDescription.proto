@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.cotx.ovsctl.description";
+option java_outer_classname = "InterfaceDescriptionProto";
+option objc_class_prefix = "HLW";
+
+/*
+    GetInterfacesResponse's message item.
+*/
+message InterfaceDescription{
+
+    /* Represents the type of operation of the interface. */
+    enum Mode{
+        /*
+            Normal mode of interface operation.
+         */
+        NORMAL=0;
+        /*
+            Access mode to a VLAN for interface.
+        */
+        ACCESS=1;
+        /*
+            Trunk mode for a set of VLANs for interface.
+        */
+        TRUNK=2;
+    }
+}

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.cotx.ovsctl.ovsdb.ovs.core";
+option java_outer_classname = "OvsPortProto";
+option objc_class_prefix = "HLW";
+
+/*
+    1. define OvsPort message type.
+    2. apply to rpc getPortByUuid's response message.
+        2.1 this rpc you can find it in BridgeConfigService.proto.
+        2.2 if position is changed,you try to find 'BridgeConfigGprc.java' file.
+*/
+message OvsPort{
+    string uuid=1;
+    string protName=2;
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.cotx.ovsctl.description";
+option java_outer_classname = "PatchDescriptionProto";
+option objc_class_prefix = "HLW";
+
+/*
+    AddPatchModeRequest's message item.
+*/
+message PatchDescription{
+
+}

@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.cotx.ovsctl.message.base";
+option java_outer_classname = "CommonMessageProto";
+option objc_class_prefix = "HLW";
+
+/* return void for rpc */
+message Void{}
+
+/* return boolean for rpc */
+message Bool{
+    bool values=1;
+}
+
+/* return map for rpc */
+message MapEntry{
+    string mkey=1;
+    string mvalue=2;
+}

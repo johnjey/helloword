@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.cotx.ovsctl.common";
+option java_outer_classname = "ControlProtocolVersionProto";
+option objc_class_prefix = "HLW";
+
+//TODO
+/*
+    1. define ControlProtocolVersion message type.
+    2. OvsBridge's message item.
+*/
+enum ControlProtocolVersion {
+    /*
+        OF_1_0("OpenFlow10"),
+        OF_1_1("OpenFlow11"),
+        OF_1_2("OpenFlow12"),
+        OF_1_3("OpenFlow13"),
+        OF_1_4("OpenFlow14"),
+        OF_1_5("OpenFlow15");
+    */
+    OF_1_0=0;
+    OF_1_1=1;
+    OF_1_2=2;
+    OF_1_3=3;
+    OF_1_4=4;
+    OF_1_5=5;
+}
